@@ -81,7 +81,7 @@
     </div>
     <div
       class="detail-container"
-      :style="hideDetail ? { height: '0px' } : { height: '379px' }"
+      :style="hideDetail ? { height: '0px' } : { height: '404px' }"
     >
       <div class="inout" v-for="category in comparisonPrev.categoryComparison">
         <div class="income">{{ category.category }}</div>
