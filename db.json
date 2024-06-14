@@ -4304,6 +4304,15 @@
       "amount": 5600,
       "date": "2024-03-11",
       "done": "TRUE"
+    },
+    {
+      "id": "b303",
+      "memo": "급여",
+      "category": "수입",
+      "type": "income",
+      "amount": 3000000,
+      "date": "2024-06-14",
+      "done": true
     }
   ]
 }
