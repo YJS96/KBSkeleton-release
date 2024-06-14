@@ -472,4 +472,9 @@ onMounted(() => {
   position: relative;
   overflow: hidden;
 }
+
+i {
+  color: var(--black);
+  font-size: 14px;
+}
 </style>

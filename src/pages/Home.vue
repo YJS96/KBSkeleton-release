@@ -225,5 +225,11 @@ i {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  margin-right: -2px;
+}
+
+i {
+  color: var(--black);
+  font-size: 15px;
 }
 </style>

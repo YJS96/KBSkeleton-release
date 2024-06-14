@@ -176,4 +176,9 @@ watch(month, () => {
   display: flex;
   justify-content: center;
 }
+
+i {
+  color: var(--black);
+  font-size: 15px;
+}
 </style>

@@ -56,7 +56,8 @@ const tabHandler = (tab) => {
   justify-content: center;
   align-items: center;
   gap: 2px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 400;
   border: 1px solid var(--gray);
   border-radius: 6px;
   padding: 12px 8px;
@@ -72,6 +73,7 @@ const tabHandler = (tab) => {
 }
 
 .tab-selected {
-  background-color: var(--nav-gray);
+  background-color: var(--green);
+  color: var(--white);
 }
 </style>
