@@ -26,15 +26,20 @@
         <option value="11">11월</option>
         <option value="12">12월</option> -->
       </select>
+      <i class="fa-solid fa-caret-down"></i>
     </div>
     <div class="income-frame">
       <ShadowBox :height="116">
         <div class="income">총 수입</div>
-        <div class="income-amount">{{ addComma(totalIncomeByMonth(month)) }}원</div>
+        <div class="income-amount">
+          {{ addComma(totalIncomeByMonth(month)) }}원
+        </div>
       </ShadowBox>
       <ShadowBox :height="116">
         <div class="income">총 지출</div>
-        <div class="income-amount">{{ addComma(totalOutcomeByMonth(month)) }}원</div>
+        <div class="income-amount">
+          {{ addComma(totalOutcomeByMonth(month)) }}원
+        </div>
       </ShadowBox>
     </div>
     <ShadowBox :height="100" @click="handleShowModal(true)">
@@ -48,15 +53,27 @@
     <ShadowBox>
       <div class="latest-upper">
         <div class="income">최근 내역</div>
-        <router-link to="/statistics" class="fa solid fa-chevron-right"></router-link>
+        <router-link
+          to="/statistics"
+          class="fa solid fa-chevron-right"
+        ></router-link>
       </div>
-      <History v-for="history in recentHistoryByMonth(month)" :value="history" />
+      <History
+        v-for="history in recentHistoryByMonth(month)"
+        :value="history"
+      />
     </ShadowBox>
     <ShadowBox :height="120">
       <div class="income-subtext">이번달 가장 큰</div>
       <div class="income">단일 지출</div>
 
-      <div class="income-amount">{{ maxOutcomeByMonth(month) ? addComma(maxOutcomeByMonth(month).amount) : '' }}원</div>
+      <div class="income-amount">
+        {{
+          maxOutcomeByMonth(month)
+            ? addComma(maxOutcomeByMonth(month).amount)
+            : ''
+        }}원
+      </div>
     </ShadowBox>
     <ShadowBox :height="120">
       <div class="income-subtext">이번달 가장 많은</div>
@@ -204,5 +221,9 @@ i {
   background-color: transparent;
   border: 0 none;
   outline: 0 none;
+  color: var(--black) !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 </style>

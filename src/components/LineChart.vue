@@ -5,18 +5,37 @@
   <div class="category-container">
     <div class="category-frame" @click="selectTab('수입')">
       <div class="category-icon">
-        <CategoryIcon :class="{ 'selected-tab-image': selectedTab === '수입' }" :category="incomeTab.category" :width="60" />
+        <CategoryIcon
+          :class="{ 'selected-tab-image': selectedTab === '수입' }"
+          :category="incomeTab.category"
+          :width="60"
+        />
       </div>
-      <div class="category-name" :class="{ 'selected-tab-text': selectedTab === '수입' }">
+      <div
+        class="category-name"
+        :class="{ 'selected-tab-text': selectedTab === '수입' }"
+      >
         {{ incomeTab.category }}
       </div>
     </div>
     <div class="divide-bar"></div>
-    <div class="category-frame" v-for="(tab, index) in outcomeList" :key="index" @click="selectTab(tab.category)">
+    <div
+      class="category-frame"
+      v-for="(tab, index) in outcomeList"
+      :key="index"
+      @click="selectTab(tab.category)"
+    >
       <div class="category-icon">
-        <CategoryIcon :class="{ 'selected-tab-image': selectedTab === tab.category }" :category="tab.category" :width="60" />
+        <CategoryIcon
+          :class="{ 'selected-tab-image': selectedTab === tab.category }"
+          :category="tab.category"
+          :width="60"
+        />
       </div>
-      <div :class="{ 'selected-tab-text': selectedTab === tab.category }" class="category-name">
+      <div
+        :class="{ 'selected-tab-text': selectedTab === tab.category }"
+        class="category-name"
+      >
         {{ tab.category }}
       </div>
     </div>
@@ -24,38 +43,56 @@
   <div class="monthlyinout">
     <div class="june">
       <div>이전 달 대비</div>
-      <select v-model="month" class="month-select">
-        <option value="1">1월</option>
-        <option value="2">2월</option>
-        <option value="3">3월</option>
-        <option value="4">4월</option>
-        <option value="5">5월</option>
-        <option value="6">6월</option>
-      </select>
+      <div>
+        <select v-model="month" class="month-select">
+          <option value="1">1월</option>
+          <option value="2">2월</option>
+          <option value="3">3월</option>
+          <option value="4">4월</option>
+          <option value="5">5월</option>
+          <option value="6">6월</option>
+        </select>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
     </div>
     <div class="inout">
       <div class="income">수입</div>
       <div>
         <div class="times">{{ comparisonPrev.incomeCountDiff }}회</div>
-        <div class="total" :class="greenOrRed(comparisonPrev.incomeSumDiff)">{{ addPlusComma(comparisonPrev.incomeSumDiff) }}원</div>
-        <div class="total" :class="greenOrRed(comparisonPrev.incomeSumDiff)">{{ addPlusComma(comparisonPrev.incomeGrowthRate) }}%</div>
+        <div class="total" :class="greenOrRed(comparisonPrev.incomeSumDiff)">
+          {{ addPlusComma(comparisonPrev.incomeSumDiff) }}원
+        </div>
+        <div class="total" :class="greenOrRed(comparisonPrev.incomeSumDiff)">
+          {{ addPlusComma(comparisonPrev.incomeGrowthRate) }}%
+        </div>
       </div>
     </div>
     <div class="inout">
       <div class="income">지출</div>
       <div>
         <div class="times">{{ comparisonPrev.outcomeCountDiff }}회</div>
-        <div class="total" :class="redOrGreen(comparisonPrev.outcomeSumDiff)">{{ addPlusComma(comparisonPrev.outcomeSumDiff) }}원</div>
-        <div class="total" :class="redOrGreen(comparisonPrev.outcomeSumDiff)">{{ addPlusComma(comparisonPrev.outcomeGrowthRate) }}%</div>
+        <div class="total" :class="redOrGreen(comparisonPrev.outcomeSumDiff)">
+          {{ addPlusComma(comparisonPrev.outcomeSumDiff) }}원
+        </div>
+        <div class="total" :class="redOrGreen(comparisonPrev.outcomeSumDiff)">
+          {{ addPlusComma(comparisonPrev.outcomeGrowthRate) }}%
+        </div>
       </div>
     </div>
-    <div class="detail-container" :style="hideDetail ? { height: '0px' } : { height: '379px' }">
+    <div
+      class="detail-container"
+      :style="hideDetail ? { height: '0px' } : { height: '379px' }"
+    >
       <div class="inout" v-for="category in comparisonPrev.categoryComparison">
         <div class="income">{{ category.category }}</div>
         <div>
           <div class="times">{{ category.countDiff }}회</div>
-          <div class="total" :class="redOrGreen(category.sumDiff)">{{ addPlusComma(category.sumDiff) }}원</div>
-          <div class="total" :class="redOrGreen(category.growthRate)">{{ addPlusComma(category.growthRate) }}%</div>
+          <div class="total" :class="redOrGreen(category.sumDiff)">
+            {{ addPlusComma(category.sumDiff) }}원
+          </div>
+          <div class="total" :class="redOrGreen(category.growthRate)">
+            {{ addPlusComma(category.growthRate) }}%
+          </div>
         </div>
       </div>
     </div>
@@ -122,7 +159,11 @@ const outcomeList = ref([
 
 const historyStore = useHistoryStore();
 
-const { getAmountsByMonthAndCategory, getComparisonWithPreviousMonth, addPlusComma } = historyStore;
+const {
+  getAmountsByMonthAndCategory,
+  getComparisonWithPreviousMonth,
+  addPlusComma,
+} = historyStore;
 const amountsByMonthAndCategory = ref(getAmountsByMonthAndCategory());
 const comparisonPrev = ref(getComparisonWithPreviousMonth(month.value));
 const greenOrRed = (num) => {
@@ -157,7 +198,10 @@ const selectTab = (tab) => {
 const getDatasetsArray = () => {
   const categoryMap = {
     noTab: {
-      data: [amountsByMonthAndCategory.value.income, amountsByMonthAndCategory.value.outcome],
+      data: [
+        amountsByMonthAndCategory.value.income,
+        amountsByMonthAndCategory.value.outcome,
+      ],
       colors: ['#FFCA67', '#CF55EE'],
       labels: ['수입', '지출 전체'],
     },
@@ -405,6 +449,11 @@ onMounted(() => {
   background-color: transparent;
   border: 0 none;
   outline: 0 none;
+  color: var(--black) !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-right: 4px;
 }
 
 .inout-detail {

@@ -4,28 +4,51 @@
       <button class="chevron-icon" @click="prevMonth">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <span class="current-year">{{ currentYear }}년 {{ currentMonth + 1 }}월</span>
+      <span class="current-year"
+        >{{ currentYear }}년 {{ currentMonth + 1 }}월</span
+      >
       <button class="chevron-icon" @click="nextMonth">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
     <div class="calendar-grid">
       <!-- 요일 헤더 -->
-      <div class="calendar-header" v-for="(day, index) in weekDays" :key="index">
+      <div
+        class="calendar-header"
+        v-for="(day, index) in weekDays"
+        :key="index"
+      >
         {{ day }}
       </div>
       <!-- 날짜 렌더링 -->
-      <div class="calendar-day" v-for="day in daysGrid" :key="day.date ? day.date.toString() : Math.random()">
+      <div
+        class="calendar-day"
+        v-for="day in daysGrid"
+        :key="day.date ? day.date.toString() : Math.random()"
+      >
         <!-- 날짜 컨텐츠 전체  -->
         <div class="daily-today-contents">
-          <div @click="selectDate(day.date)" :class="{ 'non-current-month': !day.isCurrentMonth }">
+          <div
+            @click="selectDate(day.date)"
+            :class="{ 'non-current-month': !day.isCurrentMonth }"
+          >
             <!-- today 숫자 -->
-            <div class="daily-today" :class="moment(day.date).format('YYYY-MM-DD') === piniaDate ? 'day-selected' : ''">
+            <div
+              class="daily-today"
+              :class="
+                moment(day.date).format('YYYY-MM-DD') === piniaDate
+                  ? 'day-selected'
+                  : ''
+              "
+            >
               {{ day.date ? day.date.getDate() : '' }}
             </div>
           </div>
           <!-- mome + income, outcome -->
-          <div v-if="day.isCurrentMonth && hasHistoryForDate(day.date)" class="custom-component">
+          <div
+            v-if="day.isCurrentMonth && hasHistoryForDate(day.date)"
+            class="custom-component"
+          >
             <SpecialComponent
               :date="moment(day.date).format('YYYY-MM-DD')"
               :formattedIncome="getFormattedIncome(day.date)"
@@ -127,7 +150,9 @@ const hasHistoryForDate = (date) => {
 const getFormattedIncome = (date) => {
   const formattedDate = moment(date).format('YYYY-MM-DD');
   const totalIncome = historyList.value
-    .filter((history) => history.date === formattedDate && history.type === 'income')
+    .filter(
+      (history) => history.date === formattedDate && history.type === 'income'
+    )
     .reduce((sum, history) => sum + Number(history.amount), 0);
   // console.log(`+${totalIncome.toLocaleString()}`);
   return `+${totalIncome.toLocaleString()}`;
@@ -136,14 +161,21 @@ const getFormattedIncome = (date) => {
 const getFormattedOutcome = (date) => {
   const formattedDate = moment(date).format('YYYY-MM-DD');
   const totalOutcome = historyList.value
-    .filter((history) => history.date === formattedDate && history.type === 'outcome')
+    .filter(
+      (history) => history.date === formattedDate && history.type === 'outcome'
+    )
     .reduce((sum, history) => sum + history.amount, 0);
   return `-${totalOutcome.toLocaleString()}`;
 };
 
 const hasMemoForDate = (date) => {
   const formattedDate = moment(date).format('YYYY-MM-DD');
-  return historyList.value.some((history) => history.date === formattedDate && history.details && history.details.length > 0);
+  return historyList.value.some(
+    (history) =>
+      history.date === formattedDate &&
+      history.details &&
+      history.details.length > 0
+  );
 };
 const isSpecialDate = (date) => {
   return date && date.getDate() === 10;
@@ -295,4 +327,12 @@ watch(selectedDate, () => {
   --green: #0f0;
   --dark-gray: #555;
 } */
+
+.fa-chevron-left {
+  color: var(--black) !important;
+}
+
+.fa-chevron-right {
+  color: var(--black) !important;
+}
 </style>

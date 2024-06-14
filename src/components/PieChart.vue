@@ -9,6 +9,7 @@
         <option value="5">5월</option>
         <option value="6">6월</option>
       </select>
+      <i class="fa-solid fa-caret-down"></i>
     </div>
     <div class="chart-frame">
       <canvas ref="chartCanvas"></canvas>
@@ -35,10 +36,13 @@ const date = new Date();
 const month = ref(date.getMonth() + 1);
 
 const historyStore = useHistoryStore();
-const { outcomeByCategoryAndMonth, outcomeByCategoryAndMonthWithPercentage } = historyStore;
+const { outcomeByCategoryAndMonth, outcomeByCategoryAndMonthWithPercentage } =
+  historyStore;
 
 const outcomeList = computed(() => outcomeByCategoryAndMonth(month.value));
-const percentageList = computed(() => outcomeByCategoryAndMonthWithPercentage(month.value));
+const percentageList = computed(() =>
+  outcomeByCategoryAndMonthWithPercentage(month.value)
+);
 
 Chart.register(...registerables);
 Chart.register(ChartDataLabels);
@@ -61,7 +65,13 @@ const createChart = () => {
         {
           label: '지출액',
           data: outcomeList.value,
-          backgroundColor: ['#44c4a1', '#ff553e', '#eeae55', '#64798a', '#569ddf'],
+          backgroundColor: [
+            '#44c4a1',
+            '#ff553e',
+            '#eeae55',
+            '#64798a',
+            '#569ddf',
+          ],
           borderColor: ['#44c4a1', '#ff553e', '#eeae55', '#64798a', '#569ddf'],
           borderWidth: 1,
           datalabels: {
@@ -154,6 +164,11 @@ watch(month, () => {
   background-color: transparent;
   border: 0 none;
   outline: 0 none;
+  color: var(--black) !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-right: 4px;
 }
 
 .chart-frame {
