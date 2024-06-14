@@ -93,7 +93,7 @@ const changeText = computed(() => {
 .mypage-wrapper {
   display: flex;
   flex-direction: column;
-  background-color: var(--gray);
+  background-color: var(--background);
 }
 .mypage-container {
   position: relative;

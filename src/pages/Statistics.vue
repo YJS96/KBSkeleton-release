@@ -1,7 +1,7 @@
 <template>
   <MemoModal v-if="showModal" @close-modal="handleShowModal" />
 
-  <Main :padded="false" style="background-color: var(--gray)">
+  <Main :padded="false" style="background-color: var(--background)">
     <div class="calender-warpper">
       <Calender />
       <div class="daily-history-warpper">
@@ -15,16 +15,39 @@
             <i @click="handleShowModal(true)" class="fa-solid fa-envelope"></i>
           </div> -->
           <div class="daily-spend">
-            <span class="daily-income">{{ selectedDateHistory.incomeSum ? `+ ${addComma(selectedDateHistory.incomeSum)}` : 0 }}원</span> |
-            <span class="daily-outcome">{{ selectedDateHistory.outcomeSum ? `-${addComma(selectedDateHistory.outcomeSum)}` : 0 }}원</span>
+            <span class="daily-income"
+              >{{
+                selectedDateHistory.incomeSum
+                  ? `+ ${addComma(selectedDateHistory.incomeSum)}`
+                  : 0
+              }}원</span
+            >
+            |
+            <span class="daily-outcome"
+              >{{
+                selectedDateHistory.outcomeSum
+                  ? `-${addComma(selectedDateHistory.outcomeSum)}`
+                  : 0
+              }}원</span
+            >
           </div>
         </div>
         <!-- 필터링될 History -->
         <div>
           <div class="daily-filter-spend">
-            <div v-if="selectedDateHistory.incomeSum === 0 && selectedDateHistory.outcomeSum === 0">내역이 없습니다</div>
+            <div
+              v-if="
+                selectedDateHistory.incomeSum === 0 &&
+                selectedDateHistory.outcomeSum === 0
+              "
+            >
+              내역이 없습니다
+            </div>
             <div v-else>
-              <History v-for="history in selectedDateHistory.history" :value="history" />
+              <History
+                v-for="history in selectedDateHistory.history"
+                :value="history"
+              />
             </div>
           </div>
         </div>
@@ -49,7 +72,12 @@ const { addComma } = historyStore;
 
 const selectedDateHistory = computed(() => historyStore.selectedDateHistory);
 const selectedDate = computed(() => historyStore.selectedDate);
-const selectedDay = computed(() => `${moment(selectedDate.value).format('M')}월 ${moment(selectedDate.value).format('D')}일`);
+const selectedDay = computed(
+  () =>
+    `${moment(selectedDate.value).format('M')}월 ${moment(
+      selectedDate.value
+    ).format('D')}일`
+);
 
 const showModal = ref(false);
 const tempObj = ref({
