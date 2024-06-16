@@ -140,7 +140,7 @@ const handleShowModal = (val) => {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: var(--white);
+  background-color: var(--background);
   z-index: 2;
   display: flex;
   justify-content: center;
