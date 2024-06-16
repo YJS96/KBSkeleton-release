@@ -1,6 +1,10 @@
 <template>
   <AddModal v-if="showModal" @close-modal="handleShowModal" />
-  <Main :padded="true">
+  <div v-if="!historyList[0]" class="loading">
+    <div class="spinner-border"></div>
+    <div class="loading-text">데이터 로드중입니다</div>
+  </div>
+  <Main v-else :padded="true">
     <div class="upper-bar">
       <div class="user-name-frame">
         <router-link to="/mypage">{{ userInfo.name }}</router-link>
@@ -116,6 +120,7 @@ const {
 
 // fetchHistory();
 // fetchuserInfo();
+const historyList = computed(() => historyStore.historyList);
 const userInfo = computed(() => userInfoStore.userInfo);
 
 const date = new Date();
@@ -129,6 +134,30 @@ const handleShowModal = (val) => {
 </script>
 
 <style scoped>
+.loading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--white);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.spinner-border {
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.loading-text {
+  font-size: 18px;
+  font-weight: 450;
+}
+
 .upper-bar {
   margin-top: 14px;
   display: flex;
