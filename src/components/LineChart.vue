@@ -51,6 +51,9 @@
           <option value="4">4월</option>
           <option value="5">5월</option>
           <option value="6">6월</option>
+          <option value="7">7월</option>
+          <option value="8">8월</option>
+          <option value="9">9월</option>
         </select>
         <i class="fa-solid fa-caret-down"></i>
       </div>
